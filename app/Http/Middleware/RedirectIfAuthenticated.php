@@ -18,9 +18,9 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 $user = Auth::user();
 
-                $role = strtolower(str_replace(' ', '', $user->role->nama));
+                $role = strtolower(str_replace(' ', '', $user->role_name));
 
-                return redirect()->route($role . '.dashboard');
+                return redirect()->route('dashboard.' . $role);
             }
         }
 
