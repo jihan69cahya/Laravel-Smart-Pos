@@ -26,9 +26,11 @@
                     <ul class="profile-dropdown onhover-show-div p-2">
                         <li><a href="javascript:void(0)"><i class="fa fa-user"></i> Profil</a></li>
                         <li><a href="javascript:void(0)"><i class="fa fa-cog"></i> Pengaturan</a></li>
-                        <li><a href="javascript:void(0)" id="btn_logout"><i class="fa fa-sign-out"></i>
-                                Keluar</a></li>
                     </ul>
+                <li class="onhover-dropdown p-0">
+                    <button class="btn btn-primary-light" id="btn_logout" type="button"><a href="javascript:void(0)"><i
+                                data-feather="log-out"></i>Log out</a></button>
+                </li>
                 </li>
             </ul>
         </div>
