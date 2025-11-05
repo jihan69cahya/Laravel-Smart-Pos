@@ -16,7 +16,7 @@ class User extends Authenticatable
         'nama',
         'username',
         'email',
-        'role',
+        'id_role',
     ];
 
     protected $hidden = [
@@ -28,4 +28,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    function relRole()
+    {
+        return $this->belongsTo(Role::class, 'id_role', 'id');
+    }
 }
