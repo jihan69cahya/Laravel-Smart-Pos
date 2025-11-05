@@ -36,6 +36,6 @@ class User extends Authenticatable
 
     function getRoleNameAttribute()
     {
-        return strtolower(optional($this->relRole)->nama);
+        return strtolower(str_replace(' ', '', optional($this->relRole)->nama));
     }
 }

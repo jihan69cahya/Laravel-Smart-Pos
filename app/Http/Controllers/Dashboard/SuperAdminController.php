@@ -9,6 +9,10 @@ class SuperAdminController extends Controller
 {
     public function index()
     {
-        dd('Dashboard Super Admin');
+        $breadcrumb = [
+            ['title' => 'Dashboard', 'url' => route('dashboard.superadmin')],
+            ['title' => 'Superadmin', 'url' => null]
+        ];
+        return view('dashboard.superadmin', compact('breadcrumb'));
     }
 }

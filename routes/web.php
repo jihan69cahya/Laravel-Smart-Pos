@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Dashboard\InventoriController;
+use App\Http\Controllers\Dashboard\KasirController;
 use App\Http\Controllers\Dashboard\SuperAdminController;
 
 Route::group(['middleware' => 'guest'], function () {
@@ -14,5 +16,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
         Route::get('superadmin', [SuperAdminController::class, 'index'])->name('superadmin');
+        Route::get('inventori', [InventoriController::class, 'index'])->name('inventori');
+        Route::get('kasir', [KasirController::class, 'index'])->name('kasir');
     });
 });
