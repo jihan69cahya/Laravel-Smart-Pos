@@ -40,6 +40,12 @@
                         </select>
                         <small class="text-danger pl-1" id="error-id_parent"></small>
                     </div>
+                    <div class="form-group mb-2">
+                        <label for="urutan">Urutan</label>
+                        <input type="text" id="urutan" name="urutan" class="form-control number-only"
+                            placeholder="Masukkan urutan menu">
+                        <small class="text-danger pl-1" id="error-urutan"></small>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">

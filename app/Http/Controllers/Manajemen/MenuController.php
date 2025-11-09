@@ -78,6 +78,7 @@ class MenuController extends Controller
                 'route' => $request->route,
                 'icon' => $request->icon,
                 'id_parent' => $request->id_parent == 0 ? null : $request->id_parent,
+                'urutan' => $request->urutan,
             ]);
 
             Helper::insertLog('Tambah Data', 'Menambah data menu (' . $request->nama . ')');
@@ -114,6 +115,7 @@ class MenuController extends Controller
             $data->route = $request->route;
             $data->icon = $request->icon;
             $data->id_parent = $request->id_parent == 0 ? null : $request->id_parent;
+            $data->urutan = $request->urutan;
             $data->save();
 
             Helper::insertLog('Edit Data', 'Mengubah data menu (' . $request->nama . ')');

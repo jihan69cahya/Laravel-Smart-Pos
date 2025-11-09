@@ -25,6 +25,7 @@
                                 <th>Route</th>
                                 <th>Icon</th>
                                 <th>Parent</th>
+                                <th>Urutan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -96,6 +97,11 @@
                         name: 'parent'
                     },
                     {
+                        data: 'urutan',
+                        className: 'text-center',
+                        name: 'urutan'
+                    },
+                    {
                         data: 'aksi',
                         className: 'text-center',
                         name: 'aksi'
@@ -129,6 +135,7 @@
                         $("#route").val(hasil.route);
                         $("#icon").val(hasil.icon);
                         $("#id_parent").val(hasil.id_parent).change();
+                        $("#urutan").val(hasil.urutan);
                     },
                 });
             }
