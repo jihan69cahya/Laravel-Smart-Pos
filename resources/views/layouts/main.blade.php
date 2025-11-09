@@ -10,8 +10,9 @@
     <meta name="keywords"
         content="admin template, viho admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="{{ asset('assets') }}/images/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ asset('assets') }}/images/favicon.png" type="image/x-icon">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ asset('assets') }}/images/logo/icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets') }}/images/logo/icon.png" type="image/x-icon">
     <title>Smart Pos - @yield('title')</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -36,6 +37,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/feather-icon.css">
     <!-- Plugins css start-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/sweetalert2.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/datatables.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/select2.css">
     <!-- Plugins css Ends-->
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/bootstrap.css">
@@ -46,7 +49,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/responsive.css">
 </head>
 
-<body class="dark-sidebar">
+{{-- <body class="dark-sidebar"> --}}
+
+<body>
     <!-- Loader starts-->
     <div class="loader-wrapper">
         <div class="theme-loader">
@@ -113,6 +118,9 @@
     <script src="{{ asset('assets') }}/js/bootstrap/bootstrap.min.js"></script>
     <!-- Plugins JS start-->
     <script src="{{ asset('assets') }}/js/sweet-alert/sweetalert.min.js"></script>
+    <script src="{{ asset('assets') }}/js/datatable/datatables/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('assets') }}/js/datatable/datatables/datatable.custom.js"></script>
+    <script src="{{ asset('assets') }}/js/select2/select2.full.min.js"></script>
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="{{ asset('assets') }}/js/script.js"></script>
@@ -120,6 +128,30 @@
     <!-- Plugin used-->
 
     <script>
+        function delete_error() {
+            $("[id^=error-]").hide();
+        }
+
+        function delete_form() {
+            let form = $('#formData');
+            form.find('input:not([type=button]):not([type=submit])').val('').prop('checked', false);
+            form.find('textarea').val('');
+            form.find('select').each(function() {
+                $(this).val('').change();
+            });
+        }
+
+        $('.number-only').keypress(function(e) {
+            var txt = String.fromCharCode(e.which);
+            if (!txt.match(/[0-9.,]/)) {
+                return false;
+            }
+        });
+        $('.select2').select2({
+            dropdownParent: $('#modal'),
+            placeholder: '-- Pilih salah satu --',
+        });
+
         document.getElementById('btn_logout').addEventListener('click', function(e) {
             e.preventDefault();
 

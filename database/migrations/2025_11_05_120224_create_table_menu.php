@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('m_menu', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
-            $table->string('route');
-            $table->string('icon');
-            $table->foreignId('id_parent')->constrained('m_menu')->onDelete('restrict');
+            $table->string('route')->nullable();
+            $table->string('icon')->nullable();
+            $table->foreignId('id_parent')->nullable()->constrained('m_menu')->onDelete('restrict');
             $table->timestamps();
         });
     }
