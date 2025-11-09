@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('route')->nullable();
             $table->string('icon')->nullable();
             $table->foreignId('id_parent')->nullable()->constrained('m_menu')->onDelete('restrict');
+            $table->integer('urutan')->default(1);
             $table->timestamps();
         });
     }
