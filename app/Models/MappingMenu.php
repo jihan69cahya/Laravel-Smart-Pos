@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class MappingMenu extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $table = 't_mapping_menu';
     protected $guarded = [];

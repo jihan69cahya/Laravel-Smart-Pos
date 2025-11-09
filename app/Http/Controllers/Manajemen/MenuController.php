@@ -35,12 +35,12 @@ class MenuController extends Controller
                                 <i class='fa fa-edit'></i> Edit
                             </button>
                             <button class='btn btn-danger btn-xs' onclick='hapus_data(\"$id\")'>
-                                <i class='fa fa-trash-o'></i> Delete
+                                <i class='fa fa-trash-o'></i> Hapus
                             </button>";
                     return $button;
                 })
                 ->addIndexColumn()
-                ->rawColumns(['aksi', 'icon', 'link'])
+                ->rawColumns(['aksi', 'icon'])
                 ->make(true);
         }
         $breadcrumb = [

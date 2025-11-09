@@ -45,7 +45,7 @@
                                     data-feather="users"></i><span>Manajemen</span></a>
                             <ul class="nav-submenu menu-content">
                                 <li><a href="{{ route('manajemen.menu.index') }}">Menu</a></li>
-                                <li><a href="javascript:void(0)">Role</a></li>
+                                <li><a href="{{ route('manajemen.role.index') }}">Role</a></li>
                                 <li><a href="javascript:void(0)">User</a></li>
                             </ul>
                         </li>
