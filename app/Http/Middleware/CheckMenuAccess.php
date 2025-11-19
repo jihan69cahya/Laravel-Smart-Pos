@@ -13,16 +13,24 @@ class CheckMenuAccess
     public function handle($request, Closure $next)
     {
         $user = Auth::user();
-        if (!$user) {
-            abort(403, 'Unauthorized');
-        }
 
-        $routeName = $request->route()->getName();
+        // Ambil nama route sekarang
+        $currentRoute = $request->route()->getName();
+        // contoh: manajemen.menu.index
 
-        $accessibleRoutes = $user->role->relMapping->relMenu->pluck('route')->toArray();
+        // Hanya cek jika route berakhiran .index
+        if (str_ends_with($currentRoute, '.index')) {
 
-        if (!in_array($routeName, $accessibleRoutes)) {
-            abort(404);
+            // Ambil semua route menu dari user
+            $allowedRoutes = $user->relRole
+                ->relMapping
+                ->pluck('relMenu.route')
+                ->toArray();
+
+            // Jika route sekarang tidak masuk daftar menu user → blok
+            if (!in_array($currentRoute, $allowedRoutes)) {
+                abort(403, 'Anda tidak memiliki akses untuk membuka menu ini.');
+            }
         }
 
         return $next($request);

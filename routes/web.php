@@ -9,6 +9,7 @@ use App\Http\Controllers\HelperController;
 use App\Http\Controllers\Manajemen\MenuController;
 use App\Http\Controllers\Manajemen\RoleController;
 use App\Http\Controllers\Manajemen\UserController;
+use App\Http\Controllers\Master\KategoriController;
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('', [LoginController::class, 'index'])->name('login');
@@ -26,11 +27,15 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('kasir', [KasirController::class, 'index'])->name('kasir');
     });
 
-    Route::group(['prefix' => 'manajemen', 'as' => 'manajemen.'], function () {
+    Route::group(['prefix' => 'manajemen', 'as' => 'manajemen.', 'middleware' => 'check.menu'], function () {
         Route::resource('menu', MenuController::class);
         Route::resource('role', RoleController::class);
         Route::get('mapping/{id}', [RoleController::class, 'mappingMenu'])->name('role.mapping');
         Route::post('mapping/save/{id}', [RoleController::class, 'simpanMapping'])->name('role.mapping.save');
         Route::resource('user', UserController::class);
+    });
+
+    Route::group(['prefix' => 'master', 'as' => 'master.', 'middleware' => 'check.menu'], function () {
+        Route::resource('kategori', KategoriController::class);
     });
 });
