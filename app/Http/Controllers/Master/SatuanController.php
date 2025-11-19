@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Master;
 
+use App\Models\Satuan;
 use App\Helpers\Helper;
-use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -11,12 +11,12 @@ use App\Http\Controllers\Controller;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
-class KategoriController extends Controller
+class SatuanController extends Controller
 {
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Kategori::get();
+            $data = Satuan::get();
 
             return DataTables::of($data)
                 ->editColumn("keterangan", function ($row) {
@@ -40,14 +40,14 @@ class KategoriController extends Controller
         }
         $breadcrumb = [
             ['title' => 'Master', 'url' => 'javascript:void(0)'],
-            ['title' => 'Kategori', 'url' => null]
+            ['title' => 'Satuan', 'url' => null]
         ];
-        return view('master.kategori.index', compact('breadcrumb'));
+        return view('master.satuan.index', compact('breadcrumb'));
     }
 
     public function edit($id)
     {
-        $data = Kategori::find(decrypt($id));
+        $data = Satuan::find(decrypt($id));
         return response()->json($data);
     }
 
@@ -65,18 +65,18 @@ class KategoriController extends Controller
         DB::beginTransaction();
 
         try {
-            Kategori::create([
+            Satuan::create([
                 'nama' => $request->nama,
                 'keterangan' => $request->keterangan,
             ]);
 
-            Helper::insertLog('Tambah Data', 'Menambah data kategori (' . $request->nama . ')');
+            Helper::insertLog('Tambah Data', 'Menambah data satuan (' . $request->nama . ')');
 
             DB::commit();
-            return response()->json(['success' => 'Kategori telah ditambahkan']);
+            return response()->json(['success' => 'Satuan telah ditambahkan']);
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('TAMBAH MASTER KATEGORI ERROR: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+            Log::error('TAMBAH MASTER SATUAN ERROR: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
             return response()->json(['error' => 'Terjadi kesalahan saat menambahkan data, silakan coba lagi.', 'message' => $e->getMessage()]);
         }
     }
@@ -97,22 +97,21 @@ class KategoriController extends Controller
         DB::beginTransaction();
 
         try {
-            $data = Kategori::find($id);
+            $data = Satuan::find($id);
             $data->nama = $request->nama;
             $data->keterangan = $request->keterangan;
             $data->save();
 
-            Helper::insertLog('Edit Data', 'Mengubah data kategori (' . $request->nama . ')');
+            Helper::insertLog('Edit Data', 'Mengubah data satuan (' . $request->nama . ')');
 
             DB::commit();
-            return response()->json(['success' => 'Kategori berhasil diperbarui']);
+            return response()->json(['success' => 'Satuan berhasil diperbarui']);
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('EDIT MASTER KATEGORI ERROR: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+            Log::error('EDIT MASTER SATUAN ERROR: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
             return response()->json(['error' => 'Terjadi kesalahan saat memperbarui data, silakan coba lagi.', 'message' => $e->getMessage()]);
         }
     }
-
     public function destroy($id)
     {
         $id = decrypt($id);
@@ -120,17 +119,17 @@ class KategoriController extends Controller
         DB::beginTransaction();
 
         try {
-            $data = Kategori::findOrFail($id);
+            $data = Satuan::findOrFail($id);
             $nama = $data->nama;
             $data->delete();
 
-            Helper::insertLog('Hapus Data', 'Menghapus data kategori (' . $nama . ')');
+            Helper::insertLog('Hapus Data', 'Menghapus data satuan (' . $nama . ')');
 
             DB::commit();
-            return response()->json(['success' => 'Kategori berhasil dihapus']);
+            return response()->json(['success' => 'Satuan berhasil dihapus']);
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('HAPUS MASTER KATEGORI ERROR: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+            Log::error('HAPUS MASTER SATUAN ERROR: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
             return response()->json([
                 'error' => 'Terjadi kesalahan saat menghapus data, silakan coba lagi.',
                 'message' => $e->getMessage()

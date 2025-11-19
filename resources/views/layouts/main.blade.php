@@ -47,6 +47,12 @@
     <link id="color" rel="stylesheet" href="{{ asset('assets') }}/css/color-1.css" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/responsive.css">
+    <style>
+        .small-padding td {
+            padding-top: 8px !important;
+            padding-bottom: 8px !important;
+        }
+    </style>
     @yield('css')
 </head>
 
