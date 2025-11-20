@@ -118,10 +118,12 @@
                 $("#btn_tambah").show();
                 $("#btn_edit").hide();
                 $("#title_modal").text("Tambah data menu");
+                $("#formData").attr("onsubmit", "return tambah_data()");
             } else {
                 $("#btn_tambah").hide();
                 $("#btn_edit").show();
                 $("#title_modal").text("Edit data menu");
+                $("#formData").attr("onsubmit", "return edit_data()");
                 $.ajax({
                     type: "GET",
                     url: "{{ route('manajemen.menu.edit', ['menu' => ':id']) }}".replace(':id', id),

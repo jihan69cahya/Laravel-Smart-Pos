@@ -114,6 +114,7 @@
     </div>
     <!-- latest jquery-->
     <script src="{{ asset('assets') }}/js/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
     <!-- feather icon js-->
     <script src="{{ asset('assets') }}/js/icons/feather-icon/feather.min.js"></script>
     <script src="{{ asset('assets') }}/js/icons/feather-icon/feather-icon.js"></script>
@@ -154,6 +155,14 @@
                 return false;
             }
         });
+
+        $('.maskRupiah').maskMoney({
+            prefix: 'Rp. ',
+            thousands: '.',
+            decimal: ',',
+            precision: 0
+        });
+
         $('.select2').select2({
             dropdownParent: $('#modal'),
             placeholder: '-- Pilih salah satu --',

@@ -98,10 +98,12 @@
                 $("#btn_tambah").show();
                 $("#btn_edit").hide();
                 $("#title_modal").text("Tambah data satuan");
+                $("#formData").attr("onsubmit", "return tambah_data()");
             } else {
                 $("#btn_tambah").hide();
                 $("#btn_edit").show();
                 $("#title_modal").text("Edit data satuan");
+                $("#formData").attr("onsubmit", "return edit_data()");
                 $.ajax({
                     type: "GET",
                     url: "{{ route('master.satuan.edit', ['satuan' => ':id']) }}".replace(':id', id),

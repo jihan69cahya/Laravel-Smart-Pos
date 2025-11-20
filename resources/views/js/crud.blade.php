@@ -26,10 +26,15 @@
                     });
                 } else if (response.success) {
                     $("#modal").modal("hide");
-                    swal("Berhasil!", response.success, "success");
+                    swal({
+                        title: "Berhasil!",
+                        text: response.success,
+                        icon: "success",
+                        button: false,
+                        timer: 1000
+                    });
                     get_data();
                 } else if (response.error) {
-                    toastr.error(response.error);
                     swal("Gagal!", response.error, "error");
                 }
                 $("#btn_tambah").prop("disabled", false).text("Simpan");
@@ -39,6 +44,7 @@
                 swal("Gagal!", "Terjadi kesalahan, coba lagi nanti", "error");
             },
         });
+        return false;
     }
 
     function edit_data() {
@@ -70,7 +76,13 @@
                     });
                 } else if (response.success) {
                     $("#modal").modal("hide");
-                    swal("Berhasil!", response.success, "success");
+                    swal({
+                        title: "Berhasil!",
+                        text: response.success,
+                        icon: "success",
+                        button: false,
+                        timer: 1000
+                    });
                     get_data();
                 } else if (response.error) {
                     swal("Gagal!", response.error, "error");
@@ -82,6 +94,7 @@
                 swal("Gagal!", "Terjadi kesalahan, coba lagi nanti", "error");
             },
         });
+        return false;
     }
 
     function hapus_data(id) {
@@ -102,7 +115,13 @@
                     dataType: "json",
                     success: function(response) {
                         if (response.success) {
-                            swal("Berhasil!", response.success, "success");
+                            swal({
+                                title: "Berhasil!",
+                                text: response.success,
+                                icon: "success",
+                                button: false,
+                                timer: 1000
+                            });
                             get_data();
                         } else if (response.error) {
                             swal("Gagal!", response.error, "error");
