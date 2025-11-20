@@ -10,6 +10,7 @@ use App\Http\Controllers\Manajemen\MenuController;
 use App\Http\Controllers\Manajemen\RoleController;
 use App\Http\Controllers\Manajemen\UserController;
 use App\Http\Controllers\Master\KategoriController;
+use App\Http\Controllers\Master\PelangganController;
 use App\Http\Controllers\Master\ProdukController;
 use App\Http\Controllers\Master\ProdukHargaController;
 use App\Http\Controllers\Master\SatuanController;
@@ -46,5 +47,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('produk-harga/{id}', [ProdukController::class, 'produkHarga'])->name('produk.harga');
         Route::resource('harga', ProdukHargaController::class);
         Route::resource('supplier', SupplierController::class);
+        Route::resource('pelanggan', PelangganController::class);
     });
 });

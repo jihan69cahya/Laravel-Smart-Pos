@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use Carbon\Carbon;
+use App\Models\Pelanggan;
 use App\Models\LogAktivitas;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -51,5 +52,21 @@ class Helper
         imagedestroy($thumb);
 
         return "$folder/$filename";
+    }
+
+    public static function generateNomorMember()
+    {
+        $lastPelanggan = Pelanggan::withTrashed()->orderBy('id', 'desc')->first();
+
+        if ($lastPelanggan && $lastPelanggan->no_member) {
+            $parts = explode('-', $lastPelanggan->no_member);
+            $lastNumber = intval(str_replace('P', '', $parts[0]));
+            $newNumber = $lastNumber + 1;
+        } else {
+            $newNumber = 1;
+        }
+
+        $today = Carbon::now()->format('Ymd');
+        return 'P' . $newNumber . '-' . $today;
     }
 }
