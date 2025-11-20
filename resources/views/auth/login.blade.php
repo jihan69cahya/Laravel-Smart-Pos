@@ -61,8 +61,8 @@
                         <form class="theme-form login-form" action="{{ route('do_login') }}" method="POST"
                             onsubmit="submitPostLogin(event, $(this))">
                             @csrf
-                            <h4>Login</h4>
-                            <h6>Selamat datang kembali! Masuk ke akun anda.</h6>
+                            <h3 class="text-center mb-2" style="font-weight: 700; color: #24695c;">SMART POS</h3>
+                            <h6 class="text-center mb-4">Selamat datang kembali! Masuk ke akun anda.</h6>
 
                             <div class="form-group">
                                 <label>Username</label>
