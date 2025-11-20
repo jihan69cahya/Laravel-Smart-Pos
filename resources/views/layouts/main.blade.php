@@ -163,6 +163,13 @@
             precision: 0
         });
 
+        function formatMaskMoney(selector, value) {
+            let clean = value ? value.toString().replace(/\D/g, '') : 0;
+            $(selector).val(clean);
+            $(selector).maskMoney('mask');
+        }
+
+
         $('.select2').select2({
             dropdownParent: $('#modal'),
             placeholder: '-- Pilih salah satu --',

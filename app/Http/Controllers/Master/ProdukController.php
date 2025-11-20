@@ -233,4 +233,15 @@ class ProdukController extends Controller
             ]);
         }
     }
+
+    public function produkHarga($id)
+    {
+        $breadcrumb = [
+            ['title' => 'Master', 'url' => 'javascript:void(0)'],
+            ['title' => 'Produk', 'url' => route('master.produk.index')],
+            ['title' => 'Harga', 'url' => null],
+        ];
+        $produk = Produk::find(decrypt($id));
+        return view('master.produk.harga', compact('breadcrumb', 'id', 'produk'));
+    }
 }
