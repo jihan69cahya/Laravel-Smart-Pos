@@ -2,9 +2,10 @@
 
 namespace App\Helpers;
 
-use App\Models\LogAktivitas;
 use Carbon\Carbon;
+use App\Models\LogAktivitas;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class Helper
 {
@@ -17,5 +18,38 @@ class Helper
             'status' => $aksi,
             'keterangan' => $deskripsi
         ]);
+    }
+
+    public static function compressAndUpload($file, $folder, $maxWidth = 1280)
+    {
+        $filename = time() . '.png';
+        $path = $file->getRealPath();
+
+        $source = imagecreatefromstring(file_get_contents($path));
+        $width  = imagesx($source);
+        $height = imagesy($source);
+
+        if ($width > $maxWidth) {
+            $ratio = $height / $width;
+            $newWidth  = $maxWidth;
+            $newHeight = intval($newWidth * $ratio);
+        } else {
+            $newWidth  = $width;
+            $newHeight = $height;
+        }
+
+        $thumb = imagecreatetruecolor($newWidth, $newHeight);
+        imagecopyresampled($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+        ob_start();
+        imagepng($thumb, null, 9);
+        $imageData = ob_get_clean();
+
+        Storage::put("public/$folder/" . $filename, $imageData);
+
+        imagedestroy($source);
+        imagedestroy($thumb);
+
+        return "$folder/$filename";
     }
 }
