@@ -10,6 +10,7 @@ use App\Http\Controllers\Manajemen\MenuController;
 use App\Http\Controllers\Manajemen\RoleController;
 use App\Http\Controllers\Manajemen\UserController;
 use App\Http\Controllers\Master\KategoriController;
+use App\Http\Controllers\Master\ProdukController;
 use App\Http\Controllers\Master\SatuanController;
 
 Route::group(['middleware' => 'guest'], function () {
@@ -39,5 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'master', 'as' => 'master.', 'middleware' => 'check.menu'], function () {
         Route::resource('kategori', KategoriController::class);
         Route::resource('satuan', SatuanController::class);
+        Route::resource('produk', ProdukController::class);
+        Route::get('produk-harga/{id}', [ProdukController::class, 'produkHarga'])->name('produk.harga');
     });
 });
