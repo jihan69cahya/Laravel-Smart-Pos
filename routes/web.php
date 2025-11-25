@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\InventoriController;
 use App\Http\Controllers\Dashboard\KasirController;
 use App\Http\Controllers\Dashboard\SuperAdminController;
+use App\Http\Controllers\Data\SaldoAwalController;
 use App\Http\Controllers\HelperController;
 use App\Http\Controllers\Manajemen\MenuController;
 use App\Http\Controllers\Manajemen\RoleController;
@@ -25,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::get('get_parent_menu', [HelperController::class, 'getParentMenu'])->name('get_parent_menu');
+    Route::get('get_produk_saldo_awal', [HelperController::class, 'getProdukSaldoAwal'])->name('get_produk_saldo_awal');
 
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
         Route::get('superadmin', [SuperAdminController::class, 'index'])->name('superadmin');
@@ -48,5 +50,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('harga', ProdukHargaController::class);
         Route::resource('supplier', SupplierController::class);
         Route::resource('pelanggan', PelangganController::class);
+    });
+
+    Route::group(['prefix' => 'data', 'as' => 'data.', 'middleware' => 'check.menu'], function () {
+        Route::resource('saldo-awal', SaldoAwalController::class);
     });
 });

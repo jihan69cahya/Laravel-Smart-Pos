@@ -16,7 +16,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->foreignId('id_produk')->constrained('m_produk')->onDelete('cascade');
             $table->double('jumlah');
-            $table->foreignId('id_log_stok')->constrained('t_log_stok')->onDelete('restrict');
+            $table->foreignId('id_log_stok')->nullable()->constrained('t_log_stok')->onDelete('SET NULL');
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });

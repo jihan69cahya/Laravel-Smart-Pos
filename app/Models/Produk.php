@@ -27,4 +27,9 @@ class Produk extends Model
     {
         return $this->hasOne(ProdukHarga::class, 'id_produk', 'id')->latest('tanggal');
     }
+
+    public function relSaldoAwal()
+    {
+        return $this->hasMany(SaldoAwal::class, 'id_produk', 'id');
+    }
 }
