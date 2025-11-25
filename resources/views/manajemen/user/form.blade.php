@@ -38,7 +38,8 @@
                     </div>
                     <div class="form-group mb-2">
                         <label for="role">Role *</label>
-                        <select class="js-example-basic-single col-sm-12 select2" id="role" name="role">
+                        <select class="js-example-basic-single col-sm-12 select2 select2-modal" id="role"
+                            name="role">
                             @foreach ($role as $item)
                                 <option value="{{ $item->id }}">{{ $item->nama }}</option>
                             @endforeach

@@ -33,7 +33,7 @@
                         <div class="col-md-6">
                             <div class="form-group mb-2">
                                 <label for="kategori">Kategori *</label>
-                                <select id="kategori" name="kategori" class="form-control select2">
+                                <select id="kategori" name="kategori" class="form-control select2 select2-modal">
                                     <option value="">-- Pilih Kategori --</option>
                                     @foreach ($data['kategori'] as $item)
                                         <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -46,7 +46,7 @@
                         <div class="col-md-6">
                             <div class="form-group mb-2">
                                 <label for="satuan">Satuan *</label>
-                                <select id="satuan" name="satuan" class="form-control select2">
+                                <select id="satuan" name="satuan" class="form-control select2 select2-modal">
                                     <option value="">-- Pilih Satuan --</option>
                                     @foreach ($data['satuan'] as $item)
                                         <option value="{{ $item->id }}">{{ $item->nama }}</option>

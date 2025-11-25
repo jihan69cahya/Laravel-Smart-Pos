@@ -17,7 +17,8 @@
                     </div>
                     <div class="form-group mb-2">
                         <label for="produk">Produk *</label>
-                        <select class="js-example-basic-single col-sm-12 select2" id="produk" name="produk">
+                        <select class="js-example-basic-single col-sm-12 select2 select2-modal" id="produk"
+                            name="produk">
                         </select>
                         <small class="text-danger pl-1" id="error-produk"></small>
                     </div>

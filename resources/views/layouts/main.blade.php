@@ -39,6 +39,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/sweetalert2.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/datatables.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/select2.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/daterange-picker.css">
     <!-- Plugins css Ends-->
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/bootstrap.css">
@@ -129,6 +130,9 @@
     <script src="{{ asset('assets') }}/js/datatable/datatables/jquery.dataTables.min.js"></script>
     <script src="{{ asset('assets') }}/js/datatable/datatables/datatable.custom.js"></script>
     <script src="{{ asset('assets') }}/js/select2/select2.full.min.js"></script>
+    <script src="{{ asset('assets') }}/js/datepicker/daterange-picker/moment.min.js"></script>
+    <script src="{{ asset('assets') }}/js/datepicker/daterange-picker/daterangepicker.js"></script>
+    <script src="{{ asset('assets') }}/js/datepicker/daterange-picker/daterange-picker.custom.js"></script>
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="{{ asset('assets') }}/js/script.js"></script>
@@ -169,9 +173,25 @@
             $(selector).maskMoney('mask');
         }
 
+        function formatRupiah(number) {
+            if (!number) number = 0;
 
-        $('.select2').select2({
+            let value = number.toString().replace(/[^0-9]/g, '');
+
+            let reverse = value.split('').reverse().join('');
+            let ribuan = reverse.match(/\d{1,3}/g);
+            let formatted = ribuan.join('.').split('').reverse().join('');
+
+            return 'Rp. ' + formatted;
+        }
+
+
+        $('.select2-modal').select2({
             dropdownParent: $('#modal'),
+            placeholder: '-- Pilih salah satu --',
+        });
+
+        $('.select2-not-modal').select2({
             placeholder: '-- Pilih salah satu --',
         });
 

@@ -35,7 +35,8 @@
                     </div>
                     <div class="form-group mb-2">
                         <label for="id_parent">Parent *</label>
-                        <select class="js-example-basic-single col-sm-12 select2" id="id_parent" name="id_parent">
+                        <select class="js-example-basic-single col-sm-12 select2 select2-modal" id="id_parent"
+                            name="id_parent">
 
                         </select>
                         <small class="text-danger pl-1" id="error-id_parent"></small>
