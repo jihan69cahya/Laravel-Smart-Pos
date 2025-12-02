@@ -13,7 +13,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset('assets') }}/images/logo/icon.png" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('assets') }}/images/logo/icon.png" type="image/x-icon">
-    <title>Smart Pos - @yield('title')</title>
+    <title>POS - @yield('title')</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
@@ -102,7 +102,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 footer-copyright">
-                            <p class="mb-0">Copyright 2025 © Smart Pos.</p>
+                            <p class="mb-0">Copyright 2025 © Point Of Sale.</p>
                         </div>
                         <div class="col-md-6">
                             <p class="pull-right mb-0">Created by Jihan <i class="fa fa-heart font-secondary"></i>
@@ -185,6 +185,18 @@
             return 'Rp. ' + formatted;
         }
 
+        function formatNumber(value) {
+            if (value == null || value === "") return "";
+
+            value = value.toString();
+
+            let parts = value.split(',');
+            let number = parts[0].replace(/\D/g, '');
+            let decimal = parts[1] ? ',' + parts[1] : '';
+
+            let formatted = number.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            return formatted + decimal;
+        }
 
         $('.select2-modal').select2({
             dropdownParent: $('#modal'),

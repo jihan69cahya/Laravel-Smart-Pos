@@ -12,7 +12,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="{{ asset('assets') }}/images/logo/icon.png" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('assets') }}/images/logo/icon.png" type="image/x-icon">
-    <title>Smart Pos - Halaman Login</title>
+    <title>POS - Halaman Login</title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
@@ -61,7 +61,7 @@
                         <form class="theme-form login-form" action="{{ route('do_login') }}" method="POST"
                             onsubmit="submitPostLogin(event, $(this))">
                             @csrf
-                            <h3 class="text-center mb-2" style="font-weight: 700; color: #24695c;">SMART POS</h3>
+                            <h3 class="text-center mb-2" style="font-weight: 700; color: #24695c;">POS</h3>
                             <h6 class="text-center mb-4">Selamat datang kembali! Masuk ke akun anda.</h6>
 
                             <div class="form-group">

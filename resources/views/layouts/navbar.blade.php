@@ -2,10 +2,10 @@
     <div class="main-header-right row m-0">
         <div class="main-header-left">
             <div class="logo-wrapper">
-                <a href="javascript:void(0)" class="text-success font-weight-bold h4 mb-0"><b>SMART POS</b></a>
+                <a href="javascript:void(0)" class="text-success font-weight-bold h4 mb-0"><b>POS</b></a>
             </div>
             <div class="dark-logo-wrapper">
-                <a href="javascript:void(0)" class="text-light font-weight-bold h4 mb-0"><b>SMART POS</b></a>
+                <a href="javascript:void(0)" class="text-light font-weight-bold h4 mb-0"><b>POS</b></a>
             </div>
             <div class="toggle-sidebar">
                 <i class="status_toggle middle" data-feather="align-center" id="sidebar-toggle"></i>

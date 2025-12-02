@@ -6,7 +6,7 @@
         <a href="javascript:void(0)">
             <h6 class="mt-3 f-14 f-w-600">{{ Auth::user()->nama }}</h6>
         </a>
-        <p class="mb-0 font-roboto">Smart Pos</p>
+        <p class="mb-0 font-roboto">POS</p>
     </div>
     <nav>
         <div class="main-navbar">
