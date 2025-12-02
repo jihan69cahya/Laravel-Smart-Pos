@@ -191,7 +191,7 @@ class SaldoAwalController extends Controller
             return response()->json(['success' => 'Saldo Awal berhasil dihapus']);
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('HAPUS MASTER SATUAN ERROR: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+            Log::error('HAPUS DATA SALDO AWAL ERROR: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
             return response()->json([
                 'error' => 'Terjadi kesalahan saat menghapus data, silakan coba lagi.',
                 'message' => $e->getMessage()

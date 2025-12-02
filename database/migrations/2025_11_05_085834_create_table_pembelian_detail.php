@@ -16,11 +16,11 @@ return new class extends Migration
             $table->foreignId('id_pembelian')->constrained('t_pembelian')->onDelete('cascade');
             $table->foreignId('id_produk')->constrained('m_produk')->onDelete('restrict');
             $table->double('jumlah');
-            $table->double('jumlah_terima');
-            $table->date('tanggal_terima');
+            $table->double('jumlah_terima')->default(0);
+            $table->date('tanggal_terima')->nullable();
             $table->double('harga');
             $table->double('total');
-            $table->foreignId('id_log_tok')->constrained('t_log_stok')->onDelete('restrict');
+            $table->foreignId('id_log_stok')->nullable()->constrained('t_log_stok')->onDelete('cascade');
             $table->timestamps();
         });
     }

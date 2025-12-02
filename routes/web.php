@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\InventoriController;
 use App\Http\Controllers\Dashboard\KasirController;
 use App\Http\Controllers\Dashboard\SuperAdminController;
+use App\Http\Controllers\Data\PembelianController;
 use App\Http\Controllers\Data\SaldoAwalController;
 use App\Http\Controllers\HelperController;
 use App\Http\Controllers\Manajemen\MenuController;
@@ -27,6 +28,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('get_parent_menu', [HelperController::class, 'getParentMenu'])->name('get_parent_menu');
     Route::get('get_produk_saldo_awal', [HelperController::class, 'getProdukSaldoAwal'])->name('get_produk_saldo_awal');
+    Route::get('get_produk_pembelian', [HelperController::class, 'getProdukPembelian'])->name('get_produk_pembelian');
+    Route::get('get_produk_pembelian_kode', [HelperController::class, 'getProdukPembelianKode'])->name('get_produk_pembelian_kode');
+    Route::get('get_detail_pembelian', [HelperController::class, 'getDetailPembelian'])->name('get_detail_pembelian');
 
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
         Route::get('superadmin', [SuperAdminController::class, 'index'])->name('superadmin');
@@ -54,5 +58,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['prefix' => 'data', 'as' => 'data.', 'middleware' => 'check.menu'], function () {
         Route::resource('saldo-awal', SaldoAwalController::class);
+        Route::resource('pembelian', PembelianController::class);
+        Route::get('pembelian/terima/{id}', [PembelianController::class, 'penerimaan'])->name('pembelian.terima');
+        Route::post('pembelian/simpan-penerimaan', [PembelianController::class, 'simpanPenerimaan'])->name('pembelian.simpan_penerimaan');
+        Route::get('pembelian/detail/{id}', [PembelianController::class, 'detail'])->name('pembelian.detail');
     });
 });

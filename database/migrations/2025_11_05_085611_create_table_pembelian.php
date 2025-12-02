@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->double('sub_total');
             $table->double('pajak');
+            $table->double('nilai_pajak');
             $table->double('potongan');
             $table->double('biaya_tambahan');
             $table->double('total_tagihan');

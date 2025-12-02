@@ -69,4 +69,29 @@ class Helper
         $today = Carbon::now()->format('Ymd');
         return 'P' . $newNumber . '-' . $today;
     }
+
+    public static function splitDateRange($range)
+    {
+        $parts = explode(' - ', $range);
+
+        return [
+            'start'  => trim($parts[0] ?? ''),
+            'end' => trim($parts[1] ?? ''),
+        ];
+    }
+
+    public static function statusPenerimaanBadge($status)
+    {
+        switch ($status) {
+            case 1:
+                return '<span class="badge badge-success">Diterima</span>';
+
+            case 2:
+                return '<span class="badge badge-warning">Diterima Sebagian</span>';
+
+            case 0:
+            default:
+                return '<span class="badge badge-danger">Belum Diterima</span>';
+        }
+    }
 }

@@ -17,4 +17,9 @@ class Money
         $floatRupiah = ($floatRupiah <= 0) ? abs($floatRupiah) : $floatRupiah;
         return 'Rp. ' . number_format($floatRupiah, 0, '', '.');
     }
+
+    public static function formatNumber($number, $decimal = 0)
+    {
+        return number_format($number, $decimal, ',', '.');
+    }
 }
