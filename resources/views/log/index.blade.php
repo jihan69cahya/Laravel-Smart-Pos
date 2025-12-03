@@ -1,6 +1,6 @@
 @extends('layouts.main')
-@section('title', 'Data Mutasi')
-@section('title_page', 'Data Mutasi')
+@section('title', 'Data Log Akticitas')
+@section('title_page', 'Data Log Akticitas')
 
 @section('content')
     <div class="row">
@@ -8,20 +8,21 @@
 
             <div class="card mb-3">
                 <div class="card-header">
-                    <h5>Filter Data Mutasi</h5>
+                    <h5>Filter Data Log Aktivitas</h5>
                 </div>
                 <div class="card-body">
                     <form id="formFilter" class="row g-3">
 
                         <div class="col-md-3">
-                            <input class="form-control digit daterange" id="tanggal" name="tanggal" type="text">
+                            <input class="form-control digits daterange" id="tanggal" name="tanggal" type="text">
                         </div>
 
                         <div class="col-md-4">
-                            <select name="id_produk" id="id_produk" class="form-select select2 select2-not-modal">
-                                <option value="ALL">-- Semua Produk --</option>
-                                @foreach ($data['produk'] as $item)
-                                    <option value="{{ $item->id }}">{{ $item->kode }} || {{ $item->nama }}</option>
+                            <select name="id_user" id="id_user" class="form-select select2 select2-not-modal">
+                                <option value="ALL">-- Semua Pengguna --</option>
+                                @foreach ($data['user'] as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama }} || {{ $item->role_name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -29,10 +30,6 @@
                         <div class="col-md-3 d-flex gap-2">
                             <button type="button" id="btnFilter" class="btn btn-primary btn-sm px-3" onclick="get_data()">
                                 <i class="fa fa-search"></i> Filter
-                            </button>
-                            <button type="button" id="btnExport" class="btn btn-success btn-sm px-3"
-                                onclick="export_excel()">
-                                <i class="fa fa-file-excel-o"></i> Export
                             </button>
                         </div>
 
@@ -42,27 +39,26 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h5>Daftar Data Mutasi</h5>
-                    <span>Dibawah ini adalah data log keluar/masuk produk</span>
+                    <h5>Daftar Data Log Akticitas</h5><span>Dibawah ini adalah data riwayat aktivitas yang dilakukan oleh
+                        pengguna</span>
                 </div>
-
                 <div class="card-body">
                     <table id="table" class="table table-striped dt-responsive nowrap w-100">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Tanggal</th>
-                                <th>Produk</th>
-                                <th>Jumlah</th>
-                                <th>Status</th>
+                                <th>Aksi</th>
                                 <th>Keterangan</th>
+                                <th>Pengguna yang melakukan</th>
                             </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody>
+
+                        </tbody>
                     </table>
                 </div>
             </div>
-
         </div>
     </div>
 @endsection
@@ -81,7 +77,7 @@
                 var start = moment(parts[0], 'MM/DD/YYYY').format('YYYY-MM-DD');
                 var end = moment(parts[1], 'MM/DD/YYYY').format('YYYY-MM-DD');
             }
-            var id_produk = $('#id_produk').val();
+            var id_user = $('#id_user').val();
 
             let table = $("#table").DataTable({
                 processing: true,
@@ -91,7 +87,7 @@
                     url: "{{ url()->current() }}",
                     type: 'GET',
                     data: {
-                        id_produk: id_produk,
+                        id_user: id_user,
                         start: start,
                         end: end
                     },
@@ -109,19 +105,6 @@
                         name: 'tanggal',
                     },
                     {
-                        data: 'produk',
-                        className: 'text-center',
-                        name: 'produk',
-                        render: (data) => {
-                            return `<b>${data}</b>`;
-                        }
-                    },
-                    {
-                        data: 'jumlah',
-                        className: 'text-center',
-                        name: 'jumlah',
-                    },
-                    {
                         data: 'status',
                         className: 'text-center',
                         name: 'status',
@@ -131,28 +114,19 @@
                         className: 'text-center',
                         name: 'keterangan',
                     },
+                    {
+                        data: 'nama_user',
+                        className: 'text-center',
+                        name: 'nama_user',
+                        render: (data) => {
+                            return `<b>${data}</b>`;
+                        }
+                    },
                 ],
                 createdRow: function(row, data, dataIndex) {
                     $(row).addClass('small-padding');
                 }
             });
-        }
-
-        function export_excel() {
-            var tanggal = $('#tanggal').val();
-            if (tanggal) {
-                var parts = tanggal.split(' - ');
-
-                var start = moment(parts[0], 'MM/DD/YYYY').format('YYYY-MM-DD');
-                var end = moment(parts[1], 'MM/DD/YYYY').format('YYYY-MM-DD');
-            }
-            var id_produk = $('#id_produk').val();
-            var url = "{{ route('data.mutasi.export') }}";
-            url += '?id_produk=' + encodeURIComponent(id_produk) +
-                '&start=' + encodeURIComponent(start) +
-                '&end=' + encodeURIComponent(end);
-
-            window.open(url, '_blank');
         }
     </script>
 @endsection

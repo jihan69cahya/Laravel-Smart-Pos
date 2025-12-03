@@ -108,4 +108,20 @@ class Helper
                 return 'Tidak diketahui';
         }
     }
+
+    public static function statusLogBadge($status)
+    {
+        switch ($status) {
+            case 'Tambah Data':
+                return '<span class="badge badge-success">Tambah Data</span>';
+            case 'Edit Data':
+                return '<span class="badge badge-warning">Edit Data</span>';
+            case 'Hapus Data':
+                return '<span class="badge badge-danger">Hapus Data</span>';
+            case 'Mapping Menu':
+                return '<span class="badge badge-info">Mapping Menu</span>';
+            default:
+                return '<span class="badge badge-secondary">Tidak Diketahui</span>';
+        }
+    }
 }

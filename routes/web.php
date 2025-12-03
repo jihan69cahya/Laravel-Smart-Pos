@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\InventoriController;
 use App\Http\Controllers\Dashboard\KasirController;
 use App\Http\Controllers\Dashboard\SuperAdminController;
+use App\Http\Controllers\Data\LogController;
 use App\Http\Controllers\Data\MutasiController;
 use App\Http\Controllers\Data\PembelianController;
 use App\Http\Controllers\Data\PersediaanController;
@@ -70,5 +71,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('persediaan', [PersediaanController::class, 'index'])->name('persediaan.index');
         Route::get('mutasi', [MutasiController::class, 'index'])->name('mutasi.index');
         Route::get('export', [MutasiController::class, 'export'])->name('mutasi.export');
+    });
+    Route::group(['prefix' => 'log', 'as' => 'log.', 'middleware' => 'check.menu'], function () {
+        Route::get('', [LogController::class, 'index'])->name('index');
     });
 });

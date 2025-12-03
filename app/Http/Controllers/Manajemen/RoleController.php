@@ -175,7 +175,7 @@ class RoleController extends Controller
                 MappingMenu::insert($data);
             }
 
-            Helper::insertLog('Mapping menu', 'Mengatur menu untuk role (' . $nama . ')');
+            Helper::insertLog('Mapping Menu', 'Mengatur menu untuk role (' . $nama . ')');
 
             DB::commit();
             return response()->json(['success' => 'Mapping berhasil ditambahkan']);
