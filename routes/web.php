@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\InventoriController;
 use App\Http\Controllers\Dashboard\KasirController;
 use App\Http\Controllers\Dashboard\SuperAdminController;
 use App\Http\Controllers\Data\PembelianController;
+use App\Http\Controllers\Data\PersediaanController;
 use App\Http\Controllers\Data\SaldoAwalController;
 use App\Http\Controllers\Data\StokOpnameController;
 use App\Http\Controllers\HelperController;
@@ -65,5 +66,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('pembelian/simpan-penerimaan', [PembelianController::class, 'simpanPenerimaan'])->name('pembelian.simpan_penerimaan');
         Route::get('pembelian/detail/{id}', [PembelianController::class, 'detail'])->name('pembelian.detail');
         Route::resource('stok-opname', StokOpnameController::class);
+        Route::get('persediaan', [PersediaanController::class, 'index'])->name('persediaan.index');
     });
 });
