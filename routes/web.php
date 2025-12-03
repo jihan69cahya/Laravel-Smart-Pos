@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\KasirController;
 use App\Http\Controllers\Dashboard\SuperAdminController;
 use App\Http\Controllers\Data\PembelianController;
 use App\Http\Controllers\Data\SaldoAwalController;
+use App\Http\Controllers\Data\StokOpnameController;
 use App\Http\Controllers\HelperController;
 use App\Http\Controllers\Manajemen\MenuController;
 use App\Http\Controllers\Manajemen\RoleController;
@@ -28,6 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('get_parent_menu', [HelperController::class, 'getParentMenu'])->name('get_parent_menu');
     Route::get('get_produk_saldo_awal', [HelperController::class, 'getProdukSaldoAwal'])->name('get_produk_saldo_awal');
+    Route::get('get_produk_stok_opname', [HelperController::class, 'getProdukStokOpname'])->name('get_produk_stok_opname');
     Route::get('get_produk_pembelian', [HelperController::class, 'getProdukPembelian'])->name('get_produk_pembelian');
     Route::get('get_produk_pembelian_kode', [HelperController::class, 'getProdukPembelianKode'])->name('get_produk_pembelian_kode');
     Route::get('get_detail_pembelian', [HelperController::class, 'getDetailPembelian'])->name('get_detail_pembelian');
@@ -62,5 +64,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('pembelian/terima/{id}', [PembelianController::class, 'penerimaan'])->name('pembelian.terima');
         Route::post('pembelian/simpan-penerimaan', [PembelianController::class, 'simpanPenerimaan'])->name('pembelian.simpan_penerimaan');
         Route::get('pembelian/detail/{id}', [PembelianController::class, 'detail'])->name('pembelian.detail');
+        Route::resource('stok-opname', StokOpnameController::class);
     });
 });

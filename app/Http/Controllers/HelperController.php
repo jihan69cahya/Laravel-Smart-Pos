@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
-use App\Models\PembelianDetail;
 use App\Models\Produk;
+use App\Models\StokOpname;
 use Illuminate\Http\Request;
+use App\Models\PembelianDetail;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class HelperController extends Controller
 {
@@ -22,6 +25,36 @@ class HelperController extends Controller
             ->when($id_produk, function ($query, $id_produk) {
                 $query->orWhere('id', $id_produk);
             })->get();
+        return response()->json($produk);
+    }
+
+    public function getProdukStokOpname(Request $request)
+    {
+        $id_produk = $request->id;
+        $tanggal = $request->tanggal ?? date('Y-m-d');
+
+        $produk_opname = StokOpname::where('tanggal', $tanggal)
+            ->pluck('id_produk')
+            ->toArray();
+
+        $excluded = $produk_opname;
+
+        if ($id_produk) {
+            $excluded = array_diff($produk_opname, [$id_produk]);
+        }
+        $produk = DB::table('m_produk as p')
+            ->leftJoin('t_log_stok as ls', 'ls.id_produk', '=', 'p.id') // JOIN biasa tanpa whereDate
+            ->leftJoin('m_satuan as s', 's.id', '=', 'p.id_satuan')
+            ->select(
+                'p.*',
+                's.nama as satuan',
+                DB::raw('COALESCE(SUM(CASE WHEN ls.tanggal <= "' . $tanggal . '" THEN ls.unit_masuk ELSE 0 END),0) - 
+                 COALESCE(SUM(CASE WHEN ls.tanggal <= "' . $tanggal . '" THEN ls.unit_keluar ELSE 0 END),0) AS stok')
+            )
+            ->whereNotIn('p.id', $excluded)
+            ->groupBy('p.id', 's.nama')
+            ->get();
+
         return response()->json($produk);
     }
 
