@@ -31,7 +31,7 @@ class StokOpnameController extends Controller
             $data = StokOpname::with('relProduk')->orderBy('tanggal', 'desc')->get();
             return DataTables::of($data)
                 ->editColumn("tanggal", function ($row) {
-                    return Date::format($row->tanggal, 2);
+                    return Date::format($row->tanggal, 1);
                 })
                 ->editColumn("produk", function ($row) {
                     return $row->relProduk->nama;

@@ -48,7 +48,7 @@ class PembelianController extends Controller
 
             return DataTables::of($data)
                 ->editColumn("tanggal", function ($row) {
-                    return Date::format($row->tanggal, 2);
+                    return Date::format($row->tanggal, 1);
                 })
                 ->addColumn("supplier", function ($row) {
                     return $row->relSupplier->nama ?? '-';

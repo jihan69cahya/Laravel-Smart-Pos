@@ -94,4 +94,18 @@ class Helper
                 return '<span class="badge badge-danger">Belum Diterima</span>';
         }
     }
+
+    public static function statusLogStok($status)
+    {
+        switch ($status) {
+            case 'SA':
+                return 'Saldo Awal';
+            case 'PB':
+                return 'Pembelian';
+            case 'SO':
+                return 'Stok Opname';
+            default:
+                return 'Tidak diketahui';
+        }
+    }
 }

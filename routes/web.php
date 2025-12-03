@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\InventoriController;
 use App\Http\Controllers\Dashboard\KasirController;
 use App\Http\Controllers\Dashboard\SuperAdminController;
+use App\Http\Controllers\Data\MutasiController;
 use App\Http\Controllers\Data\PembelianController;
 use App\Http\Controllers\Data\PersediaanController;
 use App\Http\Controllers\Data\SaldoAwalController;
@@ -67,5 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('pembelian/detail/{id}', [PembelianController::class, 'detail'])->name('pembelian.detail');
         Route::resource('stok-opname', StokOpnameController::class);
         Route::get('persediaan', [PersediaanController::class, 'index'])->name('persediaan.index');
+        Route::get('mutasi', [MutasiController::class, 'index'])->name('mutasi.index');
+        Route::get('export', [MutasiController::class, 'export'])->name('mutasi.export');
     });
 });
